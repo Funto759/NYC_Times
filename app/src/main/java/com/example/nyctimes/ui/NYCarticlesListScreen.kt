@@ -74,6 +74,9 @@ fun NYCarticlesListScreen(
                 contentDescription = "NYC Logo",
                 Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
             )
+            Spacer(Modifier.height(5.dp))
+            Text(text = "Select a book category to see its top ranking books",Modifier.fillMaxWidth().align(Alignment.CenterHorizontally).padding(10.dp))
+            Spacer(Modifier.height(5.dp))
             when (state) {
                 is NYCviewModel.NYCviewState.Loading -> {
                     Text("Loading")
@@ -81,24 +84,37 @@ fun NYCarticlesListScreen(
 
                 is NYCviewModel.NYCviewState.Success -> {
                     val articles = (state as NYCviewModel.NYCviewState.Success).data
-                    LazyColumn(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                        items(articles){
+                    LazyColumn(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        items(articles) { article ->
                             OutlinedCard(
                                 colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.surface,
+                                    containerColor = Color(0xFFBBDEFB) // Light blue color for the card
                                 ),
                                 border = BorderStroke(1.dp, Color.Black),
                                 modifier = Modifier
-                                    .fillMaxWidth().height(100.dp), onClick = {navController.navigate(
-                                        ScreenB(it.list_name_encoded)
-                                    )}
+                                    .fillMaxWidth()
+                                    .height(100.dp)
+                                    .padding(8.dp), // Add some space between cards
+                                onClick = {
+                                    navController.navigate(ScreenB(article.list_name_encoded))
+                                }
                             ) {
-                                Text(
-                                    text = it.display_name,
+                                // Center content vertically and horizontally
+                                Box(
                                     modifier = Modifier
-                                        .padding(16.dp).align(Alignment.CenterHorizontally),
-                                    textAlign = TextAlign.Center,
-                                )
+                                        .fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = article.display_name,
+                                        textAlign = TextAlign.Center,
+                                        style = MaterialTheme.typography.bodyLarge.copy(color = Color.Black)
+                                    )
+                                }
                             }
                         }
                     }

@@ -82,7 +82,7 @@ fun NYCarticlesDetailsScreen(
         Column {
             Spacer(Modifier.height(20.dp))
             Image(
-                painter = painterResource(R.drawable.ic_international_pok_mon_logo),
+                painter = painterResource(R.drawable.ic_newyorktimes_logo),
                 contentDescription = "NYC Logo",
                 Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
             )

@@ -21,7 +21,7 @@ fun Navigation(){
         }
         composable<ScreenB>{
             val args = it.toRoute<ScreenB>()
-            NYCarticlesDetailsScreen(navController = navController, name = args.label)
+            NYCarticlesDetailsScreen(navController = navController, name = args.label, display = args.display)
         }
         composable<ScreenC>{
             val args = it.toRoute<ScreenC>()
@@ -35,7 +35,8 @@ object ScreenA
 
 @Serializable
 data class ScreenB(
-    val label : String
+    val label : String,
+    val display:String
 )
 
 @Serializable

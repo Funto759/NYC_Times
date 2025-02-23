@@ -106,7 +106,7 @@ fun NYCarticlesListScreen(
                                     .fillMaxWidth()
                                     .height(120.dp) // Slightly taller for better readability
                                     .shadow(4.dp, RoundedCornerShape(16.dp)) // Adds shadow for elevation
-                                    .clickable { navController.navigate(ScreenB(article.list_name_encoded)) },
+                                    .clickable { navController.navigate(ScreenB(article.list_name_encoded,article.display_name)) },
                             ) {
                                 Box(
                                     modifier = Modifier

@@ -67,7 +67,8 @@ import com.example.nyctimes.ui.theme.NYCTimesTheme
 @Composable
 fun NYCarticlesDetailsScreen(
     navController: NavController,
-    name: String
+    name: String,
+    display:String
 ) {
     val viewModel: NYCviewModel = hiltViewModel()
     val state by viewModel.articlesDetails.collectAsStateWithLifecycle()
@@ -86,6 +87,8 @@ fun NYCarticlesDetailsScreen(
                 contentDescription = "NYC Logo",
                 Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
             )
+            Spacer(Modifier.height(5.dp))
+            InstructionTextDetails(display)
             when (state) {
                 is NYCviewModel.NYCviewState.Loading -> {
                     Text("Loadingggg")
@@ -223,6 +226,41 @@ fun NYCarticlesDetailsScreen(
             )
         }
 
+    }
+}
+
+@Composable
+fun InstructionTextDetails(display: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .shadow(4.dp, RoundedCornerShape(12.dp)),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFE3F2FD) // Light background for contrast
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Text(
+            text = "📚 $display",
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = Color(0xFF1E88E5), // Soft blue for the text
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun preview(name: String = "Manga"){
+    NYCTimesTheme {
+        InstructionTextDetails(name)
     }
 }
 

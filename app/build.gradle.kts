@@ -3,6 +3,8 @@ plugins {
     id ("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
+    id ("org.jetbrains.kotlin.plugin.serialization")
+
 }
 
 android {
@@ -58,8 +60,9 @@ dependencies {
 
     implementation ("androidx.compose.material:material-icons-core:1.4.0")
     implementation ("androidx.compose.material:material-icons-extended:1.4.0")
-    implementation ("androidx.navigation:navigation-compose:1.0.0-alpha09")
+    implementation ("androidx.navigation:navigation-compose:2.8.0-alpha08")
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha05")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.0")

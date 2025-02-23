@@ -1,4 +1,4 @@
-package com.example.nyctimes
+package com.example.nyctimes.util
 
 object Constants {
 

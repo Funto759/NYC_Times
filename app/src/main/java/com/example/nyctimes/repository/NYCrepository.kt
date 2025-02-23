@@ -1,6 +1,6 @@
 //package com.example.nyctimes.repository
 //
-//import com.example.nyctimes.NYCapi
+//import com.example.nyctimes.model.NYCapi
 //import com.example.nyctimes.data.NYC_Articles
 //import com.example.nyctimes.util.Resources
 //import dagger.hilt.android.scopes.ActivityScoped

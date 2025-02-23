@@ -1,6 +1,6 @@
 package com.example.nyctimes.di
 
-import com.example.nyctimes.NYCapi
+import com.example.nyctimes.model.NYCapi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

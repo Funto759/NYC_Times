@@ -21,7 +21,6 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
@@ -49,19 +48,18 @@ import com.example.nyctimes.util.Constants
 import com.example.nyctimes.model.NYCviewModel
 import com.example.nyctimes.R
 import com.example.nyctimes.navigation.Navigation
-import com.example.nyctimes.navigation.ScreenB
 import com.example.nyctimes.ui.theme.NYCTimesTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NYCarticlesListScreen(
+fun NYCarticlesDetailsScreen(
     navController: NavController,
+    name: String
 ) {
     val viewModel: NYCviewModel = hiltViewModel()
-    val state by viewModel.articles.collectAsStateWithLifecycle()
+    val state by viewModel.articlesDetails.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        viewModel.provideArticles(Constants.API_KEY)
+        viewModel.provideArticlesDetails(name,Constants.API_KEY)
     }
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -76,34 +74,31 @@ fun NYCarticlesListScreen(
             )
             when (state) {
                 is NYCviewModel.NYCviewState.Loading -> {
-                    Text("Loading")
+                    Text("Loadingggg")
                 }
 
-                is NYCviewModel.NYCviewState.Success -> {
-                    val articles = (state as NYCviewModel.NYCviewState.Success).data
+                is NYCviewModel.NYCviewState.Details -> {
+                    val details = (state as NYCviewModel.NYCviewState.Details).data
                     LazyColumn(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                        items(articles){
+                        items(details){
                             OutlinedCard(
                                 colors = CardDefaults.cardColors(
                                     containerColor = MaterialTheme.colorScheme.surface,
                                 ),
                                 border = BorderStroke(1.dp, Color.Black),
                                 modifier = Modifier
-                                    .fillMaxWidth().height(100.dp), onClick = {navController.navigate(
-                                        ScreenB(it.list_name_encoded)
-                                    )}
+                                    .fillMaxWidth().height(100.dp)
                             ) {
                                 Text(
-                                    text = it.display_name,
+                                    text = it.description,
                                     modifier = Modifier
-                                        .padding(16.dp).align(Alignment.CenterHorizontally),
+                                        .padding(16.dp),
                                     textAlign = TextAlign.Center,
                                 )
                             }
                         }
                     }
                 }
-
                 is NYCviewModel.NYCviewState.Error -> {
                     Text("${(state as NYCviewModel.NYCviewState.Error).message}")
                 }
@@ -146,14 +141,6 @@ fun NYCarticlesListScreen(
             )
         }
 
-    }
-}
-
-@Preview()
-@Composable
-fun Preview() {
-    NYCTimesTheme {
-       Navigation()
     }
 }
 
